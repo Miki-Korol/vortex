@@ -357,8 +357,8 @@ int main(int argc, char** argv) {
   std::vector<uint8_t> scene = serialize(b.nodes, root, tris);
   std::cout << "CW-BVH4: " << b.nodes.size() << " nodes, "
             << scene.size() << " bytes\n";
-  if (scene.size() > 16384) {
-    std::cerr << "scene exceeds 16 KB RTU pre-fetch budget; use a smaller mesh\n";
+  if (scene.size() > (64u << 20)) { // was 16KB now 64MB
+    std::cerr << "scene exceeds 16 KB(old) 64MB(new) RTU pre-fetch budget; use a smaller mesh\n";
     return 1;
   }
 
